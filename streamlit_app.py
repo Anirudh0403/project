@@ -9,16 +9,17 @@ st.title('Crop Recommendation: Wheat or Paddy')
 st.info('This app uses a machine learning model to recommend the best crop (Wheat or Paddy) based on your input!')
 
 # Create a dataset for demonstration purposes (replace with real data in practice)
+# Example dataset with soil nutrients and conditions
 data = {
-    'soil_type': ['Loamy', 'Sandy', 'Clay', 'Loamy', 'Black', 'Alluvial', 'Red', 'Clay'],
-    'temperature': [20, 30, 25, 18, 32, 28, 24, 29],
-    'rainfall': [200, 150, 220, 180, 140, 160, 210, 170],
-    'humidity': [50, 65, 70, 45, 60, 55, 67, 52],
-    'nitrogen': [50, 40, 60, 55, 45, 65, 50, 58],
-    'phosphorus': [30, 35, 40, 20, 45, 25, 38, 33],
-    'sulphur': [20, 25, 30, 15, 35, 20, 22, 25],
-    'potassium': [40, 50, 55, 60, 45, 50, 48, 55],
-    'crop': ['Wheat', 'Paddy', 'Paddy', 'Wheat', 'Paddy', 'Wheat', 'Paddy', 'Wheat']
+    'soil_type': ['Loamy', 'Sandy', 'Clay', 'Loamy', 'Sandy', 'Clay'],
+    'temperature': [20, 30, 25, 18, 32, 28],
+    'rainfall': [200, 150, 220, 180, 140, 160],
+    'humidity': [50, 65, 70, 45, 60, 55],
+    'nitrogen': [50, 40, 60, 55, 45, 65],
+    'phosphorus': [30, 35, 40, 20, 45, 25],
+    'sulphur': [20, 25, 30, 15, 35, 20],
+    'potassium': [40, 50, 55, 60, 45, 50],
+    'crop': ['Wheat', 'Paddy', 'Paddy', 'Wheat', 'Paddy', 'Wheat']
 }
 
 df = pd.DataFrame(data)
@@ -27,14 +28,14 @@ with st.expander('Data'):
     st.write('Raw data used for training')
     st.dataframe(df)
 
-# Extract all unique soil types from the dataset to populate the input options
+# Extract unique soil types from the dataset
 unique_soil_types = df['soil_type'].unique()
 
 # Input features for the sidebar
 with st.sidebar:
     st.header('Input Conditions for Your Farm')
     
-    # Dynamically create soil type options from the dataset
+    # Dynamically populate soil types from the dataset
     soil_type = st.selectbox('Soil Type', unique_soil_types)
     temperature = st.slider('Temperature (°C)', 10, 45, 25)
     rainfall = st.slider('Rainfall (mm)', 50, 300, 150)
