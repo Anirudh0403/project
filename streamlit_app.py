@@ -55,29 +55,6 @@ with st.sidebar:
         'potassium': potassium
     }
     input_df = pd.DataFrame(input_data, index=[0])
-    input_data = {
-        'soil_type': soil_type,
-        'temperature': temperature,
-        'rainfall': rainfall,
-        'humidity': humidity,
-        'nitrogen': nitrogen,
-        'phosphorus': phosphorus,
-        'sulphur': sulphur,
-        'potassium': potassium
-    }
-    input_df = pd.DataFrame(input_data, index=[0])
-    input_data = {
-        'soil_type': soil_type,
-        'temperature': temperature,
-        'rainfall': rainfall,
-        'humidity': humidity,
-        'nitrogen': nitrogen,
-        'phosphorus': phosphorus,
-        'sulphur': sulphur,
-        'potassium': potassium
-    }
-    input_df = pd.DataFrame(input_data, index=[0])
-    
 
 # Display user input
 with st.expander('Input features'):
