@@ -3,34 +3,23 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 
- # Title of the app
+# Title of the app
 st.title('Crop Recommendation: Wheat or Paddy')
 
 st.info('This app uses a machine learning model to recommend the best crop (Wheat or Paddy) based on your input!')
 
-# Custom CSS for background image
-page_bg_img = '''
-<style>
-body {
-    background-image: url("https://namkalam.in/wp-content/uploads/2020/12/rice-wheat.jpg");
-    background-size: cover;
-}
-</style>
-'''
-
-st.markdown(page_bg_img, unsafe_allow_html=True)
-
 # Create a dataset for demonstration purposes (replace with real data in practice)
+# Example dataset with soil nutrients and conditions
 data = {
-    'soil_type': ['Loamy', 'Sandy', 'Clay', 'Loamy', 'Sandy', 'Clay'],
-    'temperature': [20, 30, 25, 18, 32, 28],
-    'rainfall': [200, 150, 220, 180, 140, 160],
-    'humidity': [50, 65, 70, 45, 60, 55],
-    'nitrogen': [50, 40, 60, 55, 45, 65],
-    'phosphorus': [30, 35, 40, 20, 45, 25],
-    'sulphur': [20, 25, 30, 15, 35, 20],
-    'potassium': [40, 50, 55, 60, 45, 50],
-    'crop': ['Wheat', 'Paddy', 'Paddy', 'Wheat', 'Paddy', 'Wheat']
+    'soil_type': ['Loamy', 'Sandy', 'Clay', 'Loamy', 'Black', 'Alluvial', 'Red', 'Clay'],
+    'temperature': [20, 30, 25, 18, 32, 28, 24, 29],
+    'rainfall': [200, 150, 220, 180, 140, 160, 210, 170],
+    'humidity': [50, 65, 70, 45, 60, 55, 67, 52],
+    'nitrogen': [50, 40, 60, 55, 45, 65, 50, 58],
+    'phosphorus': [30, 35, 40, 20, 45, 25, 38, 33],
+    'sulphur': [20, 25, 30, 15, 35, 20, 22, 25],
+    'potassium': [40, 50, 55, 60, 45, 50, 48, 55],
+    'crop': ['Wheat', 'Paddy', 'Paddy', 'Wheat', 'Paddy', 'Wheat', 'Paddy', 'Wheat']
 }
 
 df = pd.DataFrame(data)
@@ -43,7 +32,8 @@ with st.expander('Data'):
 with st.sidebar:
     st.header('Input Conditions for Your Farm')
     
-    soil_type = st.selectbox('Soil Type', ('Loamy', 'Sandy', 'Clay'))
+    # Adding the new soil types
+    soil_type = st.selectbox('Soil Type', ('Loamy', 'Sandy', 'Clay', 'Black', 'Red', 'Alluvial'))
     temperature = st.slider('Temperature (°C)', 10, 45, 25)
     rainfall = st.slider('Rainfall (mm)', 50, 300, 150)
     humidity = st.slider('Humidity (%)', 30, 90, 60)
