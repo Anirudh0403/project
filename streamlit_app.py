@@ -12,7 +12,7 @@ st.info('This app uses a machine learning model to recommend the best crop (Whea
 page_bg_img = '''
 <style>
 body {
-    background-image: url("https://namkalam.in/wp-content/uploads/2020/12/rice-wheat.jpg");
+    background-image: url(""C:\Users\HP\Downloads\WhatsApp Image 2024-10-06 at 10.52.31 PM.jpeg"");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
