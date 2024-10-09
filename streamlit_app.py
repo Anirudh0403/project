@@ -9,7 +9,6 @@ st.title('Crop Recommendation: Wheat or Paddy')
 st.info('This app uses a machine learning model to recommend the best crop (Wheat or Paddy) based on your input!')
 
 # Create a dataset for demonstration purposes (replace with real data in practice)
-# Example dataset with soil nutrients and conditions
 data = {
     'soil_type': ['Loamy', 'Sandy', 'Clay', 'Loamy', 'Black', 'Alluvial', 'Red', 'Clay'],
     'temperature': [20, 30, 25, 18, 32, 28, 24, 29],
@@ -28,12 +27,15 @@ with st.expander('Data'):
     st.write('Raw data used for training')
     st.dataframe(df)
 
+# Extract all unique soil types from the dataset to populate the input options
+unique_soil_types = df['soil_type'].unique()
+
 # Input features for the sidebar
 with st.sidebar:
     st.header('Input Conditions for Your Farm')
     
-    # Adding the new soil types
-    soil_type = st.selectbox('Soil Type', ('Loamy', 'Sandy', 'Clay', 'Black', 'Red', 'Alluvial'))
+    # Dynamically create soil type options from the dataset
+    soil_type = st.selectbox('Soil Type', unique_soil_types)
     temperature = st.slider('Temperature (°C)', 10, 45, 25)
     rainfall = st.slider('Rainfall (mm)', 50, 300, 150)
     humidity = st.slider('Humidity (%)', 30, 90, 60)
