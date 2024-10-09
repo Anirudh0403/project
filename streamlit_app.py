@@ -8,22 +8,8 @@ st.title('Crop Recommendation: Wheat or Paddy')
 
 st.info('This app uses a machine learning model to recommend the best crop (Wheat or Paddy) based on your input!')
 
-# Add background image using custom CSS
-page_bg_img = '''
-<style>
-body {
-    background-image: url("https://namkalam.in/wp-content/uploads/2020/12/rice-wheat.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-</style>
-'''
-
-st.markdown(page_bg_img, unsafe_allow_html=True)
-
 # Create a dataset for demonstration purposes (replace with real data in practice)
+# Example dataset with soil nutrients and conditions
 data = {
     'soil_type': ['Loamy', 'Sandy', 'Clay', 'Loamy', 'Black', 'Alluvial', 'Red', 'Clay'],
     'temperature': [20, 30, 25, 18, 32, 28, 24, 29],
@@ -46,6 +32,7 @@ with st.expander('Data'):
 with st.sidebar:
     st.header('Input Conditions for Your Farm')
     
+    # Adding the new soil types
     soil_type = st.selectbox('Soil Type', ('Loamy', 'Sandy', 'Clay', 'Black', 'Red', 'Alluvial'))
     temperature = st.slider('Temperature (°C)', 10, 45, 25)
     rainfall = st.slider('Rainfall (mm)', 50, 300, 150)
