@@ -3,13 +3,24 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 
-# Title of the app
+ Crop Recommendation: Wheat or Paddy
 st.title('Crop Recommendation: Wheat or Paddy')
 
 st.info('This app uses a machine learning model to recommend the best crop (Wheat or Paddy) based on your input!')
 
+# Custom CSS for background image
+page_bg_img = '''
+<style>
+body {
+    background-image: url("https://namkalam.in/wp-content/uploads/2020/12/rice-wheat.jpg");
+    background-size: cover;
+}
+</style>
+'''
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
+
 # Create a dataset for demonstration purposes (replace with real data in practice)
-# Example dataset with soil nutrients and conditions
 data = {
     'soil_type': ['Loamy', 'Sandy', 'Clay', 'Loamy', 'Sandy', 'Clay'],
     'temperature': [20, 30, 25, 18, 32, 28],
