@@ -3,9 +3,21 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 
+# Add background image
+st.markdown(
+    """
+    <style>
+    .reportview-container {
+        background: url((link unavailable)) no-repeat center center fixed;
+        background-size: cover;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 # Title of the app
 st.title('Crop Recommendation: Wheat or Paddy')
-
 st.info('This app uses a machine learning model to recommend the best crop (Wheat or Paddy) based on your input!')
 
 # Create a dataset for demonstration purposes (replace with real data in practice)
