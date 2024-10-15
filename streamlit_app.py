@@ -8,7 +8,7 @@ st.markdown(
     """
     <style>
     .reportview-container {
-        background: url(("https://namkalam.in/wp-content/uploads/2020/12/rice-wheat.jpg")) no-repeat center center fixed;
+        background: url((https://namkalam.in/wp-content/uploads/2020/12/rice-wheat.jpg)) no-repeat center center fixed;
         background-size: cover;
     }
     </style>
