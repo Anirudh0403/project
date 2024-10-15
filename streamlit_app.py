@@ -8,7 +8,7 @@ st.markdown(
     """
     <style>
     .reportview-container {
-        background: url((link unavailable)) no-repeat center center fixed;
+        background: url(("https://namkalam.in/rice-vs-wheat-which-is-healthier/")) no-repeat center center fixed;
         background-size: cover;
     }
     </style>
