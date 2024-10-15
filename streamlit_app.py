@@ -15,7 +15,6 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
 # Title of the app
 st.title('Crop Recommendation: Wheat or Paddy')
 st.info('This app uses a machine learning model to recommend the best crop (Wheat or Paddy) based on your input!')
