@@ -23,12 +23,11 @@ def add_background(image_file):
 add_background('https://i.postimg.cc/kgHLg4YL/premium-photo-1698086768776-2fe137e167df.avif')  # Replace with your actual image URL or local file
 
 # Title of the app
-st.title('Crop Recommendation: Wheat or Paddy')
+st.title('Crop Recommendation: Wheat/Paddy')
 
 st.info('This app uses a machine learning model to recommend the best crop (Wheat or Paddy) based on your input!')
 
 # Create a dataset for demonstration purposes (replace with real data in practice)
-# Example dataset with soil nutrients and conditions
 data = {
     'soil_type': ['Loamy', 'Sandy', 'Clay', 'Loamy', 'Sandy', 'Clay'],
     'temperature': [20, 30, 25, 18, 32, 28],
@@ -109,6 +108,14 @@ st.subheader('Prediction Results')
 st.write('Probability for each crop:')
 st.dataframe(df_prediction_proba)
 
-# Display the recommended crop
-crops = np.array(['Wheat', 'Paddy'])
-st.success(f'Recommended Crop: {crops[prediction][0]}')
+# Get probabilities
+wheat_proba = prediction_proba[0][0]
+paddy_proba = prediction_proba[0][1]
+
+# Logic to display the result in a card
+with st.container():
+    if abs(wheat_proba - paddy_proba) < 0.1:  # If probabilities are too close, suggest both crops are possible
+        st.warning('Both Wheat and Paddy can be planted, as the conditions are suitable for both!')
+    else:
+        recommended_crop = crops[prediction][0]
+        st.success(f'Recommended Crop: {recommended_crop}', icon="🌾")
