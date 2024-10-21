@@ -26,7 +26,7 @@ add_background('https://i.postimg.cc/kgHLg4YL/premium-photo-1698086768776-2fe137
 # Title of the app
 app_ui = ui.page_fluid(
     ui.card(
-       st.title, ui.card_header('Crop Recommendation: Wheat/Paddy'),
+       st.title ui.card_header('Crop Recommendation: Wheat/Paddy'),
 #st.title('Crop Recommendation: Wheat/Paddy1')
         full_screen=True,
     )
