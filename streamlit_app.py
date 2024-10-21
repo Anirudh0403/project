@@ -24,20 +24,21 @@ add_background('https://i.postimg.cc/kgHLg4YL/premium-photo-1698086768776-2fe137
 
 # Title of the app
 st.title('Crop Recommendation: Wheat or Paddy')
+
 st.info('This app uses a machine learning model to recommend the best crop (Wheat or Paddy) based on your input!')
 
 # Create a dataset for demonstration purposes (replace with real data in practice)
 # Example dataset with soil nutrients and conditions
 data = {
-    'soil_type': ['Loamy', 'Sandy', 'Clay', 'Loamy', 'Sandy', 'Clay', 'Black', 'Red', 'Alluvial'],
-    'temperature': [20, 30, 25, 18, 32, 28, 22, 28, 20],
-    'rainfall': [200, 150, 220, 180, 140, 160, 250, 180, 190],
-    'humidity': [50, 65, 70, 45, 60, 55, 60, 70, 65],
-    'nitrogen': [50, 40, 60, 55, 45, 65, 70, 50, 60],
-    'phosphorus': [30, 35, 40, 20, 45, 25, 30, 40, 35],
-    'sulphur': [20, 25, 30, 15, 35, 20, 25, 30, 20],
-    'potassium': [40, 50, 55, 60, 45, 50, 45, 50, 55],
-    'crop': ['Wheat', 'Paddy', 'Paddy', 'Wheat', 'Paddy', 'Wheat', 'Wheat', 'Paddy', 'Paddy']
+    'soil_type': ['Loamy', 'Sandy', 'Clay', 'Loamy', 'Sandy', 'Clay'],
+    'temperature': [20, 30, 25, 18, 32, 28],
+    'rainfall': [200, 150, 220, 180, 140, 160],
+    'humidity': [50, 65, 70, 45, 60, 55],
+    'nitrogen': [50, 40, 60, 55, 45, 65],
+    'phosphorus': [30, 35, 40, 20, 45, 25],
+    'sulphur': [20, 25, 30, 15, 35, 20],
+    'potassium': [40, 50, 55, 60, 45, 50],
+    'crop': ['Wheat', 'Paddy', 'Paddy', 'Wheat', 'Paddy', 'Wheat']
 }
 
 df = pd.DataFrame(data)
@@ -50,7 +51,7 @@ with st.expander('Data'):
 with st.sidebar:
     st.header('Input Conditions for Your Farm')
     
-    soil_type = st.selectbox('Soil Type', ('Loamy', 'Sandy', 'Clay', 'Black', 'Red', 'Alluvial'))
+    soil_type = st.selectbox('Soil Type', ('Loamy', 'Sandy', 'Clay'))
     temperature = st.slider('Temperature (°C)', 10, 45, 25)
     rainfall = st.slider('Rainfall (mm)', 50, 300, 150)
     humidity = st.slider('Humidity (%)', 30, 90, 60)
@@ -69,4 +70,45 @@ with st.sidebar:
         'nitrogen': nitrogen,
         'phosphorus': phosphorus,
         'sulphur': sulphur,
-        'pot
+        'potassium': potassium
+    }
+    input_df = pd.DataFrame(input_data, index=[0])
+
+# Display user input
+with st.expander('Input features'):
+    st.write('Here are the conditions you provided:')
+    st.dataframe(input_df)
+
+# Data preparation
+X_raw = df.drop('crop', axis=1)
+y_raw = df['crop']
+
+# One-hot encode categorical features (soil_type)
+X_encoded = pd.get_dummies(X_raw, columns=['soil_type'])
+input_encoded = pd.get_dummies(input_df, columns=['soil_type'])
+
+# Ensure input_encoded has the same columns as X_encoded
+input_encoded = input_encoded.reindex(columns=X_encoded.columns, fill_value=0)
+
+# Encode the target variable (crop: Wheat=0, Paddy=1)
+target_mapper = {'Wheat': 0, 'Paddy': 1}
+y = y_raw.map(target_mapper)
+
+# Model training and prediction
+clf = RandomForestClassifier()
+clf.fit(X_encoded, y)
+
+# Prediction for the input data
+prediction = clf.predict(input_encoded)
+prediction_proba = clf.predict_proba(input_encoded)
+
+# Display the prediction probabilities
+df_prediction_proba = pd.DataFrame(prediction_proba, columns=['Wheat', 'Paddy'])
+
+st.subheader('Prediction Results')
+st.write('Probability for each crop:')
+st.dataframe(df_prediction_proba)
+
+# Display the recommended crop
+crops = np.array(['Wheat', 'Paddy'])
+st.success(f'Recommended Crop: {crops[prediction][0]}')
