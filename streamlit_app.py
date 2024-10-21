@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+import App, ui
 from sklearn.ensemble import RandomForestClassifier
 
 # Custom CSS to add background image
@@ -23,7 +24,14 @@ def add_background(image_file):
 add_background('https://i.postimg.cc/kgHLg4YL/premium-photo-1698086768776-2fe137e167df.avif')  # Replace with your actual image URL or local file
 
 # Title of the app
-st.title('Crop Recommendation: Wheat or Paddy')
+app_ui = ui.page_fluid(
+    ui.card(
+        ui.card_header('Crop Recommendation: Wheat/Paddy'),
+st.title('Crop Recommendation: Wheat/Paddy1')
+        full_screen=True,
+    )
+)
+app = App(app_ui, server=None)
 
 st.info('This app uses a machine learning model to recommend the best crop (Wheat or Paddy) based on your input!')
 
