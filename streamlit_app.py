@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # Title of the app
 st.title("Air Pollution Detection by Vehicles")
-
+ 
 # Sidebar for user input
 st.sidebar.header("Input Pollution Data")
 st.sidebar.write("Enter the percentage of each pollutant emitted by the vehicle:")
