@@ -7,7 +7,7 @@ st.title("Air Pollution Detection by Vehicles")
 
 # Sidebar for user input
 st.sidebar.header("Input Pollution Data")
-st.sidebar.write("Enter the percentage of each pollutant emitted by the vehicle:")
+st.sidebar.write("Enter the percentage of each pollutant emitted by the vehicle:") 
 
 # Input fields for pollutants
 co = st.sidebar.number_input("Carbon Monoxide (CO) (%)", min_value=0.0, max_value=100.0, value=0.0)
